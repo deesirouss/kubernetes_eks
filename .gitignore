@@ -1,0 +1,13 @@
+**/.terraform/*
+**/.terraform*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+.idea
+.DS_Store
+# .tfvars files
+*.tfvars
+
+# List of IPs
