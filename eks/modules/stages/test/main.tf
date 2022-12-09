@@ -40,32 +40,32 @@ module "dev_ec2" {
 # EKS Cluster
 ###########################
 
-module "eks_cluster_public" {
-  providers = {
-    aws = aws.nvirginia
-  }
-  source              = "../../common/EKS"
-  stage               = local.stage
-  eks_cluster_name    = "eks-public"
-  tags                = local.tags
-  cluster_subnet_ids  = module.vpc_demo.public_subnet_ids
-}
+#module "eks_cluster_public" {
+#  providers = {
+#    aws = aws.nvirginia
+#  }
+#  source              = "../../common/EKS"
+#  stage               = local.stage
+#  eks_cluster_name    = "eks-public"
+#  tags                = local.tags
+#  cluster_subnet_ids  = module.vpc_demo.public_subnet_ids
+#}
 #
 ############################
 ## EKS public node-grp
 ############################
 #
-module "eks_ng_public" {
-  providers = {
-    aws = aws.nvirginia
-  }
-  source = "../../common/EKS-node-group"
-  tags = local.tags
-  stage = local.stage
-  eks_cluster_name = module.eks_cluster_public.cluster_name
-  eks_node_group_name = "${local.stage}-ng-public"
-  node_subnet_ids = module.vpc_demo.public_subnet_ids
-}
+#module "eks_ng_public" {
+#  providers = {
+#    aws = aws.nvirginia
+#  }
+#  source = "../../common/EKS-node-group"
+#  tags = local.tags
+#  stage = local.stage
+#  eks_cluster_name = module.eks_cluster_public.cluster_name
+#  eks_node_group_name = "${local.stage}-ng-public"
+#  node_subnet_ids = module.vpc_demo.public_subnet_ids
+#}
 #
 #module "eks_ng_private" {
 #  providers = {
