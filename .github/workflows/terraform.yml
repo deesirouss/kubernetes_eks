@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  TERRAFORM_CLI_PATH: eks/
+
 jobs:
   terraform:
     name: "Terraform"
