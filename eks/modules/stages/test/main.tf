@@ -40,16 +40,16 @@ module "dev_ec2" {
 # EKS Cluster
 ###########################
 
-#module "eks_cluster_public" {
-#  providers = {
-#    aws = aws.nvirginia
-#  }
-#  source              = "../../common/EKS"
-#  stage               = local.stage
-#  eks_cluster_name    = "eks-public"
-#  tags                = local.tags
-#  cluster_subnet_ids  = module.vpc_demo.public_subnet_ids
-#}
+module "eks_cluster_public" {
+  providers = {
+    aws = aws.nvirginia
+  }
+  source              = "../../common/EKS"
+  stage               = local.stage
+  eks_cluster_name    = "eks-public"
+  tags                = local.tags
+  cluster_subnet_ids  = module.vpc_demo.public_subnet_ids
+}
 #
 ############################
 ## EKS public node-grp
