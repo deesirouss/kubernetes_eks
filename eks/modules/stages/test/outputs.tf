@@ -33,3 +33,15 @@ output "igw_id" {
 output "ec2_private_ip" {
   value = module.dev_ec2.public_ip
 }
+
+#output "eks_cluster_endpoint" {
+#  value = module.eks_ng.cluster_endpoint
+#}
+#
+#output "eks_cluster_cert" {
+#  value = module.eks_ng.kubeconfig-certificate-authority-data
+#}
+#
+#output "ng_id" {
+#  value = module.eks_ng.ng_id
+#}
