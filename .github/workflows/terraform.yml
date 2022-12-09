@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  TERRAFORM_CLI_PATH: eks/
-
 jobs:
   terraform:
     name: "Terraform"
@@ -23,20 +20,19 @@ jobs:
           # terraform_version: 0.13.0:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Change directory
-        id: change
-        run: cd eks/
-
       - name: Terraform Format
         id: fmt
+        working-directory: ./eks
         run: terraform fmt -check
 
       - name: Terraform Init
         id: init
+        working-directory: ./eks
         run: terraform init
       
       - name: Terraform Validate
         id: validate
+        working-directory: ./eks
         run: terraform validate -no-color
 
       - name: Terraform Plan
