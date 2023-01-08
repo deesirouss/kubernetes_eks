@@ -95,12 +95,14 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           echo "github push event"
-          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-          echo $PR_NUMBER
-          if [ $PR_NUMBER == null]
-          then
-            terraform apply -auto-approve -input=false
-          else
+          # Check if the push event was a PR merge
+          if [ "$(jq -r '.head_commit.message' "$GITHUB_EVENT_PATH" | grep -c '^Merge pull request')" -gt 0 ]; then
+            # Extract the PR number from the commit message
+            PR_NUMBER=$(jq -r '.head_commit.message' "$GITHUB_EVENT_PATH" | sed -E 's/^Merge pull request #([0-9]+) .*/\1/')
+            echo "PR $PR_NUMBER was merged!"
             aws s3 cp s3://pr-devops-test/"$PR_NUMBER.plan" .
             terraform apply -auto-approve -input=false $PR_NUMBER.plan
+          else
+            echo "This push event was not a PR merge."
+            terraform apply -auto-approve -input=false
           fi
