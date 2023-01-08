@@ -96,5 +96,9 @@ jobs:
         run: |
           echo "github push event"
           PR_NUMBER=$(jq -r '.pull_request.number' "$GITHUB_EVENT_PATH")
-          aws s3 cp s3://pr-devops-test/"$PR_NUMBER.plan" .
-          terraform apply -auto-approve -input=false "$PR_NUMBER.plan"
+          if [$PR_NUMBER == null]
+          then
+            terraform apply -auto-approve -input=false
+          else
+            aws s3 cp s3://pr-devops-test/"$PR_NUMBER.plan" .
+            terraform apply -auto-approve -input=false "$PR_NUMBER.plan"
