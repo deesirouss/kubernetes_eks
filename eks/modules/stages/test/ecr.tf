@@ -7,9 +7,9 @@ resource "aws_ecr_repository" "repository" {
   tags = local.tags
 }
 
-resource "aws_ecr_repository" "test1" {
+resource "aws_ecr_repository" "test2" {
   provider = aws.nvirginia
-  name     = "vyaguta/test1"
+  name     = "vyaguta/test2"
   image_scanning_configuration {
     scan_on_push = true
   }
