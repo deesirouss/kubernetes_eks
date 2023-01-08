@@ -20,6 +20,21 @@ jobs:
           # terraform_version: 0.13.0:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+        # Login to AWS
+      - name: Login to AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+
+      - name: Setup Stage
+        shell: bash
+        run: |
+          sudo apt -y update
+          sudo apt install -y awscli jq
+
       - name: Terraform Format
         id: fmt
         working-directory: ./eks
@@ -38,8 +53,14 @@ jobs:
       - name: Terraform Plan
         id: plan
         working-directory: ./eks
+        shell: bash
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
+        run: |
+          echo "github pull_request event"
+          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          echo $PR_NUMBER
+          terraform plan -no-color -input=false -out="$PR_NUMBER.plan"
+          aws s3 cp "$PR_NUMBER.plan" s3://pr-devops-test/
         continue-on-error: true
 
       - uses: actions/github-script@v6
@@ -72,4 +93,8 @@ jobs:
       - name: Terraform Apply
         working-directory: ./eks
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: |
+          echo "github push event"
+          PR_NUMBER=$(jq -r '.pull_request.number' "$GITHUB_EVENT_PATH")
+          aws s3 cp s3://pr-devops-test/"$PR_NUMBER.out" .
+          terraform apply -auto-approve -input=false "$PR_NUMBER.out"
