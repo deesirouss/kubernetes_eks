@@ -4,5 +4,5 @@ variable "vpc_cidr" {
 }
 variable "environment" {
   type    = string
-  default = "Bibek"
+  default = "Vyaguta"
 }

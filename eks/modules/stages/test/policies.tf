@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "ec2_bastion" {
 resource "aws_iam_policy" "ec2_bastion" {
   name   = join("-", [local.stage, var.environment, "bastion-policy"])
   policy = data.aws_iam_policy_document.ec2_bastion.json
-  tags = local.tags
+  tags   = local.tags
 }
 
 resource "aws_iam_role_policy_attachment" "policy_attachment_1" {
