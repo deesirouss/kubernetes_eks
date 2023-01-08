@@ -20,7 +20,7 @@ jobs:
           # terraform_version: 0.13.0:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-            # Login to AWS
+        # Login to AWS
       - name: Login to AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -28,6 +28,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+
+      - name: Setup Stage
+        shell: bash
+        run: |
+          sudo apt -y update
+          sudo apt install -y awscli jq
 
       - name: Terraform Format
         id: fmt
