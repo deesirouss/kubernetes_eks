@@ -57,8 +57,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "github pull_request event"
-          echo #$GITHUB_EVENT_NUMBER
-          PR_NUMBER=#$GITHUB_EVENT_NUMBER
+          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo $PR_NUMBER
           terraform plan -no-color -input=false -out="$PR_NUMBER.plan"
           aws s3 cp "$PR_NUMBER.plan" s3://pr-devops-test/
