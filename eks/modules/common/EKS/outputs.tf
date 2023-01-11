@@ -17,3 +17,7 @@ output "cluster_endpoint" {
 output "kubeconfig-certificate-authority-data" {
   value = aws_eks_cluster.default.certificate_authority[0].data
 }
+
+output "eks_role_name" {
+  value = aws_iam_role.default.name
+}

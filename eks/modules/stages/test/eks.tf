@@ -42,3 +42,5 @@ module "eks_ng_private" {
   eks_node_group_name = "${local.stage}-ng-private"
   node_subnet_ids     = module.vpc_demo.private_subnet_ids
 }
+
+

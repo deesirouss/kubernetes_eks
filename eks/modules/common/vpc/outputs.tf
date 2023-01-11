@@ -25,3 +25,7 @@ output "public_subnet_ids" {
 output "igw_id" {
   value = aws_internet_gateway.ig.id
 }
+
+output "vpc_security_group_id" {
+  value = aws_vpc.vpc.default_security_group_id
+}
