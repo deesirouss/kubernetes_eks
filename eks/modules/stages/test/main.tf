@@ -26,6 +26,7 @@ module "dev_ec2" {
   }
   source                  = "../../common/ec2"
   ec2_instance_name       = "bibek_bastion_host"
+  ec2_instance_type       = "t3.medium"
   ami_id                  = "ami-08ad748ca6d229b62"
   ec2_security_group_name = join("-", [local.stage, var.environment])
   vpc_id                  = module.vpc_demo.vpc_id
