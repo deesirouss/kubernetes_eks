@@ -1,4 +1,5 @@
 locals {
+  secret_stage = "prod"
   stage = "prod-eks-test"
   tags = {
     Name      = join("-", [var.environment, local.stage])
