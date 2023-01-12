@@ -45,10 +45,10 @@ resource "aws_subnet" "public_subnet" {
 
 locals {
   public_eks_tag = {
-    kubernetes.io/role/elb = 1
+    "kubernetes.io/role/elb" = 1
   }
   private_eks_tag = {
-    kubernetes.io/role/internal-elb = 1
+    "kubernetes.io/role/internal-elb" = 1
   }
 }
 
