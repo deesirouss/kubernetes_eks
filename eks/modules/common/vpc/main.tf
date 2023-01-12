@@ -40,7 +40,16 @@ resource "aws_subnet" "public_subnet" {
   cidr_block              = cidrsubnet(aws_vpc.vpc.cidr_block, 4, count.index)
   availability_zone       = var.availability_zones_names[count.index]
   map_public_ip_on_launch = true
-  tags                    = var.tags
+  tags                    = merge(var.tags, local.public_eks_tag)
+}
+
+locals {
+  public_eks_tag = {
+    kubernetes.io/role/elb = 1
+  }
+  private_eks_tag = {
+    kubernetes.io/role/internal-elb = 1
+  }
 }
 
 # Configuration for Private subnet
@@ -51,7 +60,7 @@ resource "aws_subnet" "private_subnet" {
   cidr_block        = cidrsubnet(aws_vpc.vpc.cidr_block, 4, count.index + 2)
   availability_zone = var.availability_zones_names[count.index]
   #map_public_ip_on_launch = false
-  tags = var.tags
+  tags = merge(var.tags, local.private_eks_tag)
 }
 
 
