@@ -37,9 +37,9 @@ resource "aws_iam_policy" "policy_eks" {
   tags = local.tags
 }
 
-#resource "aws_iam_role_policy_attachment" "policy_attachment_eks" {
-#  policy_arn = aws_iam_policy.policy_eks.arn
-#  role       = module.eks_cluster_private.eks_role_name
-#}
+resource "aws_iam_role_policy_attachment" "policy_attachment_eks" {
+  policy_arn = aws_iam_policy.policy_eks.arn
+  role       = module.eks_cluster_private.eks_role_name
+}
 
 
