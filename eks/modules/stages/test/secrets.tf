@@ -52,6 +52,20 @@ resource "aws_secretsmanager_secret" "okr_app" {
   name                    = join("/", ["np-vyaguta", "okr", "app", local.secret_stage])
   recovery_window_in_days = 0
 }
+resource "aws_secretsmanager_secret" "rnr_api" {
+  name                    = join("/", ["np-vyaguta", "rnr", "api", local.secret_stage])
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret" "rnr_app" {
+  name                    = join("/", ["np-vyaguta", "rnr", "app", local.secret_stage])
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret" "organization-chart_app" {
+  name                    = join("/", ["np-vyaguta", "organization-chart", "app", local.secret_stage])
+  recovery_window_in_days = 0
+}
 
 data "aws_iam_policy_document" "aws_secrets" {
   statement {
@@ -70,7 +84,10 @@ data "aws_iam_policy_document" "aws_secrets" {
       aws_secretsmanager_secret.teams_api.arn,
       aws_secretsmanager_secret.teams_app.arn,
       aws_secretsmanager_secret.okr_api.arn,
-      aws_secretsmanager_secret.okr_app.arn
+      aws_secretsmanager_secret.okr_app.arn,
+      aws_secretsmanager_secret.rnr_api.arn,
+      aws_secretsmanager_secret.rnr_app.arn,
+      aws_secretsmanager_secret.organization-chart_app.arn
     ]
   }
 }
