@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "eks_policy" {
         "ecr:InitiateLayerUpload",
         "ecr:BatchCheckLayerAvailability",
         "ecr:GetRepositoryPolicy",
-        "ecr:GetLifecyclePolicy"
+        "ecr:GetLifecyclePolicy",
       ]
       resources = [
         aws_ecr_repository.repository.arn
@@ -31,15 +31,14 @@ data "aws_iam_policy_document" "eks_policy" {
 }
 
 resource "aws_iam_policy" "policy_eks" {
-  name = join("-", [
-  local.stage, var.environment, "eks-policy"])
+  name = join("-", [var.environment, "eks-policy"])
   policy = data.aws_iam_policy_document.eks_policy.json
   tags = local.tags
 }
 
-#resource "aws_iam_role_policy_attachment" "policy_attachment_eks" {
-#  policy_arn = aws_iam_policy.policy_eks.arn
-#  role       = module.eks_cluster_private.eks_role_name
-#}
+resource "aws_iam_role_policy_attachment" "policy_attachment_eks" {
+ policy_arn = aws_iam_policy.policy_eks.arn
+ role       = module.eks_cluster_private.eks_role_name
+}
 
 

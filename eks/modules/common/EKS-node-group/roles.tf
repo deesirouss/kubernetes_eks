@@ -3,7 +3,7 @@
 ######################
 
 resource "aws_iam_role" "default_node" {
-  name = "${var.stage}-${var.eks_node_group_name}-role"
+  name = "${var.eks_node_group_name}-role"
   tags = var.tags
 
   assume_role_policy = jsonencode({

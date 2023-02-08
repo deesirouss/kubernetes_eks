@@ -2,7 +2,7 @@
 #####################
 
 resource "aws_iam_role" "default" {
-  name = "${var.stage}-${var.eks_cluster_name}-role"
+  name = "${var.eks_cluster_name}-role"
   tags = var.tags
 
   assume_role_policy = <<POLICY

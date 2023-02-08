@@ -1,17 +1,22 @@
+
 resource "aws_eks_node_group" "default_node" {
   cluster_name    = var.eks_cluster_name
-  node_group_name = "${var.stage}-${var.eks_node_group_name}"
+  node_group_name = "${var.eks_node_group_name}"
   node_role_arn   = aws_iam_role.default_node.arn
-  subnet_ids      = var.node_subnet_ids
   version         = var.eks_version
-  ami_type        = var.node_ami_type
-  capacity_type   = var.node_capacity_type
-  disk_size       = var.node_disk_size
-  instance_types  = var.node_instace_types
-  remote_access {
-    ec2_ssh_key = var.ec2_ssh_key_name
-  }
+  subnet_ids      = var.node_subnet_ids
 
+  ami_type        = "CUSTOM"
+  capacity_type   = var.node_capacity_type
+  # disk_size       = var.node_disk_size
+  # # instance_types  = var.node_instace_types
+  # remote_access {
+  #   ec2_ssh_key = var.ec2_ssh_key_name
+  # }
+  launch_template {
+    name    = var.launch_template_name
+    version = var.launch_template_version
+  }
   scaling_config {
     desired_size = var.node_desired_size
     max_size     = var.node_max_size

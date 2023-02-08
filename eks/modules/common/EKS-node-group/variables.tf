@@ -49,7 +49,7 @@ variable "node_instace_types" {
 
 variable "ec2_ssh_key_name" {
   type    = string
-  default = "bibek-lf-training"
+  default = "bipin_key"
 }
 
 variable "node_desired_size" {
@@ -70,4 +70,11 @@ variable "node_min_size" {
 variable "node_max_unavailable" {
   type    = number
   default = 1
+}
+variable "launch_template_name" {
+  description = "The created launch template's name"
+}
+variable "launch_template_version" {
+  type = string
+  description = " subin dai  "
 }

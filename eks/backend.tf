@@ -1,9 +1,9 @@
 terraform {
-  cloud {
-    organization = "lf-tf-demo"
+  # cloud {
+  #   organization = "lf-tf-demo"
 
-    workspaces {
-      name = "kubernetes-2022-11-12"
-    }
+  #   workspaces {
+  #     name = "kubernetes-2022-11-12"
+  #   }
   }
-}
+# }

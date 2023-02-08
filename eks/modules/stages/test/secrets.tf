@@ -76,8 +76,7 @@ data "aws_iam_policy_document" "aws_secrets" {
 }
 
 resource "aws_iam_policy" "aws_secrets" {
-  name = join("-", [
-  local.secret_stage, var.environment, "secret-manager-policy"])
+  name = join("-", [var.environment, "secret-manager-policy"])
   policy = data.aws_iam_policy_document.aws_secrets.json
   tags = local.tags
 }

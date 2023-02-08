@@ -1,6 +1,6 @@
 resource "aws_ecr_repository" "repository" {
   provider = aws.nvirginia
-  name     = "vyaguta/test"
+  name     = "vyaguta"
   image_scanning_configuration {
     scan_on_push = true
   }
