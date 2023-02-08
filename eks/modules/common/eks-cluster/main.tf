@@ -61,17 +61,17 @@ locals {
     }
   ]
 
-  map_bastion_host_roles = [
-    for role_arn in var.bastion_host_role_arns : {
-      rolearn : role_arn
-      username : "system:node:{{EC2PrivateDNSName}}"
-      groups : [
-        "system:masters"
-      ]
-    }
-  ]
+#  map_bastion_host_roles = [
+#    for role_arn in var.bastion_host_role_arns : {
+#      rolearn : role_arn
+#      username : "system:node:{{EC2PrivateDNSName}}"
+#      groups : [
+#        "system:masters"
+#      ]
+#    }
+#  ]
 
-  map_bastion_host_roles_yaml      = trimspace(yamlencode(local.map_bastion_host_roles))
+#  map_bastion_host_roles_yaml      = trimspace(yamlencode(local.map_bastion_host_roles))
   map_worker_roles_yaml            = trimspace(yamlencode(local.map_worker_roles))
   map_additional_iam_roles_yaml    = trimspace(yamlencode(var.map_additional_iam_roles))
   map_additional_iam_users_yaml    = trimspace(yamlencode(var.map_additional_iam_users))
@@ -87,7 +87,7 @@ data "template_file" "configmap_auth" {
     map_additional_iam_roles_yaml    = local.map_additional_iam_roles_yaml
     map_additional_iam_users_yaml    = local.map_additional_iam_users_yaml
     map_additional_aws_accounts_yaml = local.map_additional_aws_accounts_yaml
-    map_bastion_host_roles_yaml      = local.map_bastion_host_roles_yaml
+#    map_bastion_host_roles_yaml      = local.map_bastion_host_roles_yaml
   }
 }
 

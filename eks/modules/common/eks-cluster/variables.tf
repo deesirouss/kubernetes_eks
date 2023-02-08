@@ -135,10 +135,10 @@ variable "map_additional_iam_roles" {
   default = []
 }
 
-variable "bastion_host_role_arns" {
-  type        = list(string)
-  description = "IAM roles to add to `config-map-aws-auth` ConfigMap"
-}
+#variable "bastion_host_role_arns" {
+#  type        = list(string)
+#  description = "IAM roles to add to `config-map-aws-auth` ConfigMap"
+#}
 
 variable "map_additional_iam_users" {
   description = "Additional IAM users to add to `config-map-aws-auth` ConfigMap"
