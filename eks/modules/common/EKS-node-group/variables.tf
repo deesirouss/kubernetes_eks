@@ -59,15 +59,15 @@ variable "node_desired_size" {
 
 variable "node_max_size" {
   type    = number
-  default = 5
+  default = 4
 }
 
 variable "node_min_size" {
   type    = number
-  default = 3
+  default = 4
 }
 
 variable "node_max_unavailable" {
   type    = number
-  default = 2
+  default = 1
 }
