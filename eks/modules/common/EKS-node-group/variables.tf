@@ -54,7 +54,7 @@ variable "ec2_ssh_key_name" {
 
 variable "node_desired_size" {
   type    = number
-  default = 3
+  default = 4
 }
 
 variable "node_max_size" {
@@ -69,5 +69,5 @@ variable "node_min_size" {
 
 variable "node_max_unavailable" {
   type    = number
-  default = 1
+  default = 2
 }
