@@ -104,5 +104,5 @@ jobs:
             terraform apply -auto-approve -input=false $PR_NUMBER.plan
           else
             echo "This push event was not a PR merge."
-            terraform apply -auto-approve -input=false
+            terraform apply 
           fi
