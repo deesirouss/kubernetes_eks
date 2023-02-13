@@ -11,7 +11,7 @@ module "eks_cluster_private" {
   eks_cluster_name                = "vyaguta"
   tags                            = local.tags
   cluster_subnet_ids              = module.vpc_demo.private_subnet_ids
-  cluster_endpoint_public_access  = false
+  cluster_endpoint_public_access  = true
   cluster_endpoint_private_access = true
 }
 
