@@ -34,7 +34,6 @@ jobs:
         run: |
           sudo apt -y update
           sudo apt install -y awscli jq
-
       - name: Terraform Format
         id: fmt
         working-directory: ./eks
