@@ -9,7 +9,7 @@ resource "aws_eks_node_group" "default_node" {
   disk_size       = var.node_disk_size
   instance_types  = var.node_instace_types
   remote_access {
-    ec2_ssh_key = bipin-donot-touch
+    ec2_ssh_key = "bipin-donot-touch"
   }
 
   scaling_config {
