@@ -34,7 +34,6 @@ jobs:
         run: |
           sudo apt -y update
           sudo apt install -y awscli jq
-
       - name: Terraform Format
         id: fmt
         working-directory: ./eks
@@ -104,5 +103,5 @@ jobs:
             terraform apply -auto-approve -input=false $PR_NUMBER.plan
           else
             echo "This push event was not a PR merge."
-            terraform apply 
+            terraform apply -auto-approve -input=false
           fi
