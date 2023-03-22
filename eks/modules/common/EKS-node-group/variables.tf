@@ -44,7 +44,7 @@ variable "node_disk_size" {
 
 variable "node_instace_types" {
   type    = list(string)
-  default = ["t3.xlarge"]
+  default = ["t3.large"]
 }
 
 variable "ec2_ssh_key_name" {
@@ -54,7 +54,7 @@ variable "ec2_ssh_key_name" {
 
 variable "node_desired_size" {
   type    = number
-  default = 3
+  default = 4
 }
 
 variable "node_max_size" {
